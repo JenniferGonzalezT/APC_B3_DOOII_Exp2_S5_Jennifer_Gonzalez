@@ -20,10 +20,16 @@ public class Inventario {
     }
     
     public void agregarProducto(Producto producto) {
+        if (producto == null) {
+            throw new IllegalArgumentException("No se puede agregar un producto nulo.");
+        }
         productos.put(producto.getCodigo(), producto);
     }
     
     public void eliminarProducto(String codigo) {
+        if (!productos.containsKey(codigo)) {
+            throw new IllegalArgumentException("El código no se encontró en el inventario.");
+        }
         productos.remove(codigo);
     }
     
