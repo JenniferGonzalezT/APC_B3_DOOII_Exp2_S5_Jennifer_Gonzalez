@@ -9,7 +9,7 @@ public class FormatoMoneda {
     
     private FormatoMoneda() {}
     
-    // Formato de pesos chilenos
+    // Formato en pesos chilenos
     public static String CLP(double valor) {
         return CLP.format(valor);
     }
