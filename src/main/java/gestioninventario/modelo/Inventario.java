@@ -1,6 +1,8 @@
 package gestioninventario.modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Inventario {
     private HashMap<String, Producto> productos;
@@ -21,14 +23,25 @@ public class Inventario {
         productos.put(producto.getCodigo(), producto);
     }
     
+    public void eliminarProducto(String codigo) {
+        productos.remove(codigo);
+    }
+    
     public Producto buscarProducto(String codigo) {
         return productos.get(codigo);
     }
     
-    public void mostrarInventario() {
-        for (String codigo : productos.keySet()) {
-            buscarProducto(codigo).descripcionProducto();
+    public List<String> mostrarInventario() {
+        List<String> inventario = new ArrayList<>();
+        
+        if (productos.isEmpty()) {
+            inventario.add("El inventario está vacío.");
+            return inventario;
         }
+        
+        for (Producto producto : productos.values()) {
+            inventario.add(producto.informacionProducto());
+        }
+        return inventario;
     }
-    
 }
