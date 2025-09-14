@@ -10,11 +10,11 @@ public class Producto {
     private int stock;
 
     public Producto(String codigo, String nombre, String descripcion, double precio, int stock) {
-        this.codigo = codigo;
-        this.nombre = nombre;
+        this.codigo = validarStringObligatorio(codigo, "Código");
+        this.nombre = validarStringObligatorio(nombre, "Nombre");
         this.descripcion = descripcion;
-        this.precio = precio;
-        this.stock = stock;
+        this.precio = validarPrecio(precio);
+        this.stock = validarIntPositivo(stock, "Stock");
     }
 
     public String getCodigo() {
@@ -22,7 +22,7 @@ public class Producto {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        this.codigo = validarStringObligatorio(codigo, "Código");
     }
 
     public String getNombre() {
@@ -30,7 +30,7 @@ public class Producto {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = validarStringObligatorio(nombre, "Nombre");
     }
 
     public String getDescripcion() {
@@ -46,7 +46,7 @@ public class Producto {
     }
 
     public void setPrecio(double precio) {
-        this.precio = precio;
+        this.precio = validarPrecio(precio);
     }
 
     public int getStock() {
@@ -54,15 +54,11 @@ public class Producto {
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        this.stock = validarIntPositivo(stock, "Stock");
     }
     
     public void actualizarPrecio(double nuevoPrecio) {
-        if (nuevoPrecio > 0) {
-            this.precio = nuevoPrecio;
-        } else {
-            throw new IllegalArgumentException("Error: El precio no puede ser negativo ni cero.");
-        }
+        this.precio = validarPrecio(nuevoPrecio);
     }
     
     public String informacionProducto() {
@@ -71,5 +67,27 @@ public class Producto {
                " -> Descripción: " + descripcion +
                " -> Precio: " + FormatoMoneda.CLP(precio) +
                "-> Stock: " + stock;
+    }
+    
+    // Métodos privados para validaciones
+    private String validarStringObligatorio(String campo, String nombreCampo) {
+        if (campo == null || campo.isBlank()) {
+            throw new IllegalArgumentException(nombreCampo + " no puede estar vacío.");
+        }
+        return campo.trim();
+    }
+    
+    private double validarPrecio(double precio) {
+        if (precio <= 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo ni cero.");
+        }
+        return precio;
+    }
+    
+    private int validarIntPositivo(int numero, String nombreNumero) {
+        if (numero < 0) {
+            throw new IllegalArgumentException(nombreNumero + " no puede ser negativo.");
+        }
+        return numero;
     }
 }
