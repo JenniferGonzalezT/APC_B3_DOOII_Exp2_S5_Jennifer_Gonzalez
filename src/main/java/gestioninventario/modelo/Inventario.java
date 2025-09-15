@@ -27,17 +27,16 @@ public class Inventario {
     }
     
     public void eliminarProducto(String codigo) {
-        if (!productos.containsKey(codigo)) {
-            throw new IllegalArgumentException("El código no se encontró en el inventario.");
-        }
+        validarCodigo(codigo);
         productos.remove(codigo);
     }
     
     public Producto buscarProducto(String codigo) {
+        validarCodigo(codigo);
         return productos.get(codigo);
     }
     
-    public List<String> mostrarInventario() {
+    public List<String> generarInventario() {
         List<String> inventario = new ArrayList<>();
         
         if (productos.isEmpty()) {
@@ -49,5 +48,11 @@ public class Inventario {
             inventario.add(producto.informacionProducto());
         }
         return inventario;
+    }
+    
+    private void validarCodigo(String codigo) {
+        if (!productos.containsKey(codigo)) {
+            throw new IllegalArgumentException("El código no se encontró en el inventario.");
+        }
     }
 }
