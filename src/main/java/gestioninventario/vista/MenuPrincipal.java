@@ -77,16 +77,30 @@ public class MenuPrincipal {
     
     private void agregarProducto() {
         System.out.println("\n=============== AGREGAR PRODUCTO ==============");
-        String codigo = leerCodigo();
-        /* ARREGLAR ESTO para que el codigo no este vacio
-        String codigo;
-        while(codigo.isBlank()) {
+        
+        
+        String codigo = "";
+        boolean codigoValido = false;
+        while(!codigoValido) {
             codigo = leerCodigo();
-            System.out.println("El código no puede estar vacío. Intente nuevamente.");
+            if (codigo.isBlank()) {
+                System.out.println("El código no puede estar vacío. Intente nuevamente.");
+            } else {
+                codigoValido = true;
+            }
         }
-        */
-        System.out.print("\nIngrese el nombre del producto: ");
-        String nombre = scanner.nextLine().trim();
+        
+        String nombre = "";
+        boolean nombreValido = false;
+        while(!nombreValido) {
+            System.out.print("\nIngrese el nombre del producto: ");
+            nombre = scanner.nextLine().trim();
+            if (nombre.isBlank()) {
+                System.out.println("El nombre no puede estar vacío. Intente nuevamente.");
+            } else {
+                nombreValido = true;
+            }
+        }
         
         System.out.print("\nIngrese la descripción del producto: ");
         String descripcion = scanner.nextLine().trim();
