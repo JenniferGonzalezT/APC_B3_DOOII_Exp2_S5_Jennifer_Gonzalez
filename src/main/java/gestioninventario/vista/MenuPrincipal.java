@@ -1,15 +1,19 @@
 package gestioninventario.vista;
 
+import gestioninventario.modelo.Inventario;
+import gestioninventario.modelo.Producto;
 import java.util.Scanner;
 
 public class MenuPrincipal {
     private final Scanner scanner;
+    private final Inventario inventario;
 
-    public MenuPrincipal() {
+    public MenuPrincipal(Inventario inventario) {
         this.scanner = new Scanner(System.in);
+        this.inventario = inventario;
     }
     
-    public void mostrarMenu() {
+    private void mostrarMenu() {
         System.out.println("\n===================== MENÚ ====================");
         System.out.println("(1) Agregar producto");
         System.out.println("(2) Eliminar producto");
@@ -18,7 +22,7 @@ public class MenuPrincipal {
         System.out.println("(0) Salir");
     }
     
-    public int opcionMenu() {
+    private int opcionMenu() {
         final int OPCION_MIN = 0;
         final int OPCION_MAX = 4;
         
@@ -46,6 +50,7 @@ public class MenuPrincipal {
     public void accionMenu() {
         int opcion;
         do {
+            mostrarMenu();
             opcion = opcionMenu();
             switch (opcion) {
                 case 0:
@@ -71,20 +76,94 @@ public class MenuPrincipal {
     }
     
     private void agregarProducto() {
+        System.out.println("\n=============== AGREGAR PRODUCTO ==============");
+        String codigo = leerCodigo();
+        /* ARREGLAR ESTO para que el codigo no este vacio
+        String codigo;
+        while(codigo.isBlank()) {
+            codigo = leerCodigo();
+            System.out.println("El código no puede estar vacío. Intente nuevamente.");
+        }
+        */
+        System.out.print("\nIngrese el nombre del producto: ");
+        String nombre = scanner.nextLine().trim();
         
+        System.out.print("\nIngrese la descripción del producto: ");
+        String descripcion = scanner.nextLine().trim();
+        
+        double precio = 0;
+        boolean precioValido = false;
+        while (!precioValido) {
+            System.out.print("\nIngrese el precio del producto: $");
+            try {
+                String entrada = scanner.nextLine().trim();
+                precio = Double.parseDouble(entrada);
+                if (precio <= 0) {
+                    System.out.println("El precio no es válido, debe ser mayor a 0. Intente nuevamente.");
+                } else {
+                    precioValido = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("La entrada no es válida, recuerde ingresar un número. Intente nuevamente.");
+            }
+        }
+        
+        int stock = 0;
+        boolean stockValido = false;
+        while (!stockValido) {
+            System.out.print("\nIngrese el stock del producto: ");
+            try {
+                String entrada = scanner.nextLine().trim();
+                stock = Integer.parseInt(entrada);
+                if (stock < 0) {
+                    System.out.println("El stock no es válido, debe ser mayor o igual a 0. Intente nuevamente.");
+                } else {
+                    stockValido = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("La entrada no es válida. Recuerde ingresar un número entero.");
+            }
+        }
+        
+        try {
+            inventario.agregarProducto(new Producto(codigo, nombre, descripcion, precio, stock));
+            System.out.println("Producto #" + codigo + " agregado.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     private void eliminarProducto() {
-        
+        System.out.println("\n=============== ELIMINAR PRODUCTO =============");
+        String codigo = leerCodigo();
+        try {
+            inventario.eliminarProducto(codigo);
+            System.out.println("Producto #" + codigo + " eliminado.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     private void buscarProducto() {
-        
+        System.out.println("\n================ BUSCAR PRODUCTO ==============");
+        String codigo = leerCodigo();
+        try {
+            Producto producto = inventario.buscarProducto(codigo);
+            System.out.println(producto.informacionProducto());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     private void mostrarInventario() {
-        
+        System.out.println("\n=============== MOSTRAR INVENTARIO ============");
+        for (String texto : inventario.generarInventario()) {
+            System.out.println(texto);
+        }
     }
     
-    
+    private String leerCodigo() {
+        System.out.print("Ingrese el código del producto: #");
+        return scanner.nextLine().trim().toUpperCase();
+    }
 }
