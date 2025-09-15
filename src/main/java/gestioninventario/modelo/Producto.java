@@ -12,7 +12,7 @@ public class Producto {
     public Producto(String codigo, String nombre, String descripcion, double precio, int stock) {
         this.codigo = validarStringObligatorio(codigo, "Código");
         this.nombre = validarStringObligatorio(nombre, "Nombre");
-        this.descripcion = descripcion;
+        this.descripcion = validarDescripcion(descripcion);
         this.precio = validarPrecio(precio);
         this.stock = validarIntPositivo(stock, "Stock");
     }
@@ -38,7 +38,7 @@ public class Producto {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = validarDescripcion(descripcion);
     }
 
     public double getPrecio() {
@@ -89,5 +89,9 @@ public class Producto {
             throw new IllegalArgumentException(nombreNumero + " no puede ser negativo.");
         }
         return numero;
+    }
+    
+    private String validarDescripcion(String descripcion) {
+        return (descripcion == null || descripcion.isBlank()) ? "Sin descripción" : descripcion.trim();
     }
 }
