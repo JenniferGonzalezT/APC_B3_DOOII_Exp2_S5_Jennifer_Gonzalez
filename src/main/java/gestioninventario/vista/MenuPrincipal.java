@@ -140,8 +140,9 @@ public class MenuPrincipal {
         }
         
         try {
-            inventario.agregarProducto(new Producto(codigo, nombre, descripcion, precio, stock));
-            System.out.println("Producto #" + codigo + " agregado.");
+            Producto producto = new Producto(codigo, nombre, descripcion, precio, stock);
+            inventario.agregarProducto(producto);
+            System.out.println("\nProducto #" + codigo + " agregado. (" + producto.informacionProducto() + ")");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -151,8 +152,8 @@ public class MenuPrincipal {
         System.out.println("\n=============== ELIMINAR PRODUCTO =============");
         String codigo = leerCodigo();
         try {
-            inventario.eliminarProducto(codigo);
-            System.out.println("Producto #" + codigo + " eliminado.");
+            Producto producto = inventario.eliminarProducto(codigo);
+            System.out.println("\nProducto #" + codigo + " eliminado. (" + producto.informacionProducto() + ")");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
