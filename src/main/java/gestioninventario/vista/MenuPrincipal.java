@@ -78,7 +78,6 @@ public class MenuPrincipal {
     private void agregarProducto() {
         System.out.println("\n=============== AGREGAR PRODUCTO ==============");
         
-        
         String codigo = "";
         boolean codigoValido = false;
         while(!codigoValido) {
