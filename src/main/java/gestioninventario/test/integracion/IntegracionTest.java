@@ -15,6 +15,9 @@ public class IntegracionTest {
         System.out.println("\nCreando un inventario...");
         Inventario inventario = new Inventario();
         
+        // Mostrar estado inicial del inventario
+        System.out.println("\nMostrando inventario:" + inventario.generarInventario());
+        
         // Agregar productos al inventario
         System.out.println("\nAgregando productos al inventario...");
         inventario.agregarProducto(new Producto("TEC031", "Teclado", "Teclado gamer violeta con luces", 92000, 10));

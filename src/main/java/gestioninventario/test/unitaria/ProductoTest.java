@@ -26,5 +26,13 @@ public class ProductoTest {
         System.out.println("Precio original: " + producto.getPrecio());
         producto.actualizarPrecio(90000);
         System.out.println("Precio actualizado: " + producto.getPrecio());
+        
+        // Actualizar precio inválido
+        System.out.println("\nIntentando actualizar precio con un valor no válido...");
+        try {
+            producto.actualizarPrecio(-100);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
