@@ -16,9 +16,9 @@ public class Main {
         Inventario inventario = new Inventario();
         
         System.out.println("Creando unos productos...");
-        inventario.agregarProducto(new Producto("T031", "Teclado", "Teclado gamer violeta con luces", 92000, 10));
-        inventario.agregarProducto(new Producto("T032", "Teclado", "Teclado inalámbrico grafito", 39990, 5));
-        inventario.agregarProducto(new Producto("M017", "Mouse", "Mouse ergonomico negro", 49990, 7));
+        inventario.agregarProducto(new Producto("TEC031", "Teclado", "Teclado gamer violeta con luces", 92000, 10));
+        inventario.agregarProducto(new Producto("TEC032", "Teclado", "Teclado inalámbrico grafito", 39990, 5));
+        inventario.agregarProducto(new Producto("MOU017", "Mouse", "Mouse ergonomico negro", 49990, 7));
         
         MenuPrincipal menu = new MenuPrincipal(inventario);
         menu.accionMenu();
