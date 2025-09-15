@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Inventario {
-    private HashMap<String, Producto> productos;
+    private final HashMap<String, Producto> productos;
 
     public Inventario() {
         this.productos = new HashMap<>();
