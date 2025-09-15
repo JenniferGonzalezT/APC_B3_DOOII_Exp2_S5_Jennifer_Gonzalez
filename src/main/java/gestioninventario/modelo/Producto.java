@@ -10,7 +10,7 @@ public class Producto {
     private int stock;
 
     public Producto(String codigo, String nombre, String descripcion, double precio, int stock) {
-        this.codigo = validarStringObligatorio(codigo, "Código");
+        this.codigo = validarStringObligatorio(codigo.toUpperCase(), "Código");
         this.nombre = validarStringObligatorio(nombre, "Nombre");
         this.descripcion = validarDescripcion(descripcion);
         this.precio = validarPrecio(precio);
@@ -22,7 +22,7 @@ public class Producto {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = validarStringObligatorio(codigo, "Código");
+        this.codigo = validarStringObligatorio(codigo.toUpperCase(), "Código");
     }
 
     public String getNombre() {
