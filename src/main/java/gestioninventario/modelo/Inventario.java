@@ -26,9 +26,9 @@ public class Inventario {
         productos.put(producto.getCodigo(), producto);
     }
     
-    public void eliminarProducto(String codigo) {
+    public Producto eliminarProducto(String codigo) {
         validarCodigo(codigo);
-        productos.remove(codigo);
+        return productos.remove(codigo);
     }
     
     public Producto buscarProducto(String codigo) {
