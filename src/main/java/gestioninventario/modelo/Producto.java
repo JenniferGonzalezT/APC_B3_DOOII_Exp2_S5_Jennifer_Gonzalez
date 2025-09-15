@@ -63,10 +63,10 @@ public class Producto {
     
     public String informacionProducto() {
         return "Producto #" + codigo +
-               " -> Nombre: " + nombre +
-               " -> Descripción: " + descripcion +
-               " -> Precio: " + FormatoMoneda.CLP(precio) +
-               "-> Stock: " + stock;
+               " - Nombre: " + nombre +
+               " - Descripción: " + descripcion +
+               " - Precio: " + FormatoMoneda.CLP(precio) +
+               " - Stock: " + stock;
     }
     
     // Métodos privados para validaciones
