@@ -10,14 +10,6 @@ public class Inventario {
     public Inventario() {
         this.productos = new HashMap<>();
     }
-
-    public HashMap<String, Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(HashMap<String, Producto> productos) {
-        this.productos = productos;
-    }
     
     public void agregarProducto(Producto producto) {
         if (producto == null) {
